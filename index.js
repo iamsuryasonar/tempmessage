@@ -167,7 +167,7 @@ app.post("/login", upload.single("image"), async (req, res) => {
 });
 
 app.get("/auth/signout", (req, res) => {
-  if (!req.headers["cookie"]) return res.redirect("/login");
+  if (!req.headers["cookie"]) return res.redirect("/");
   let coo = req.headers["cookie"];
   let usertoken = coo.slice(4);
 
@@ -182,10 +182,10 @@ app.get("/auth/signout", (req, res) => {
         user.author = signedoutauthor;
         user.save((err, user) => {
           if (!err) {
-            return res.redirect("/login");
+            return res.redirect("/");
           }
           if (!data) {
-            return res.redirect("/login");
+            return res.redirect("/");
           }
         });
       }
