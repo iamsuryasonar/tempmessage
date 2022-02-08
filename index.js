@@ -14,7 +14,7 @@ let User = require("./User");
 let app = express();
 app.use(express.json());
 app.use("/public", express.static("public"));
-app.use("uploads", express.static("uploads"));
+app.use("/uploads", express.static("uploads"));
 
 app.set("view engine", "ejs");
 
