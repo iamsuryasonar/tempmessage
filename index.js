@@ -100,14 +100,11 @@ app.get("/:uuid", (req, res) => {
         return;
       } else {
         // MESSAGE is not expired-> update status to seen and then return data
-        Message.findOne({ uuid: uuid }, (err, data) => {
-          if (err) res.render("error", { error: "message expired" });
-          data.seen = true;
-          data.save((err, data) => {
-            if (err) return res.render("error", { error: err });
-            res.render("viewMessage", { data: data });
-            return;
-          });
+        data.seen = true;
+        data.save((err, data) => {
+          if (err) return res.render("error", { error: err });
+          res.render("viewMessage", { data: data });
+          return;
         });
       }
     }
