@@ -7,18 +7,30 @@
 body {
   height: 100vh;
   width: 100%;
-  display: grid;
-  place-items: center;
   background-color: #ecf0f3;
 }
-
-.container {
-  width: 90%;
-  height: 90%;
+.navigationbar {
+  padding: 0px 60px;
+  width: 100%;
+  height: 80px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  z-index: 222;
+  background-color: #ecf0f3;
+}
+.buttonwrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.externalwrapper {
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
 }
 .wrapper {
   display: grid;
@@ -30,15 +42,15 @@ body {
   padding: 20px;
   border-radius: 5px;
 }
-.wrapper2 {
-  display: grid;
-  place-items: center;
-  height: 500px;
-  width: 500px;
-  color: #393e46;
-  padding: 20px;
-  border-radius: 5px;
+.container {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
+
 form {
   width: 90%;
   height: 90%;
@@ -71,6 +83,51 @@ button:active {
   box-shadow: inset 8px 8px 10px #c3c3c3, inset -8px -8px 10px #fdfdfd;
 }
 
+a {
+  text-decoration-line: none;
+  color: #393e46;
+}
+.button {
+  margin: auto 20px;
+  width: 100px;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 10px;
+  background: #ecf0f3;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 8px 8px 10px #c3c3c3, -8px -8px 10px #fdfdfd;
+}
+.button:active {
+  box-shadow: inset 8px 8px 10px #c3c3c3, inset -8px -8px 10px #fdfdfd;
+}
+.fixedbutton {
+  width: 140px;
+  height: 60px;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  margin: 0px;
+  border-radius: 0px;
+}
+
+.labelandinput{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.labelandinput input{
+  background-color: #ecf0f3;
+  width: 75%;
+  padding: 8px;
+}
+.labelandinput label{
+  padding: 8px;
+  font-size: 18px;
+}
+
 img {
   max-height: 300px;
   max-width: 450px;
@@ -91,4 +148,33 @@ p {
   border-radius: 8px;
   background: #ecf0f3;
   box-shadow: inset 8px 8px 10px #c3c3c3, inset -8px -8px 10px #fdfdfd;
+}
+@media screen and (max-width: 750px) {
+  .wrapper {
+    display: grid;
+    place-items: center;
+    height: 350px;
+    width: 350px;
+    color: #393e46;
+    box-shadow: -8px -8px 8px #ffffff, 8px 8px 8px #ceced1;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  .container {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+}
+@media screen and (max-width: 1020px) {
+  .wrapper {
+    height: 400px;
+    width: 400px;
+  }
+  .container {
+    gap: 8px;
+  }
 }

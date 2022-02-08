@@ -10,28 +10,31 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        <h1>Create Message</h1>
-        <div class="container">
-            <form class="form" action="/" method="POST" enctype="multipart/form-data">
-                <div>
-                    <textarea type="text" id="caption" name="caption" value="" placeholder="Caption" rows="5" cols="20"
-                        required></textarea>
-                </div>
-                <div>
-                    <input type="file" id="image" name="image" value="" required>
-                </div>
-                <div>
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
-        </div>
+    <a class="button fixedbutton" href="/auth/signout">Sign Out</a>
+    <div class="externalwrapper">
+        <div class="wrapper">
+            <h1>Create Message</h1>
+            <div class="container">
+                <form class="form" action="/createmessage" method="POST" enctype="multipart/form-data">
+                    <div>
+                        <textarea type="text" id="caption" name="caption" value="" placeholder="Caption" rows="5"
+                            cols="20" required></textarea>
+                    </div>
+                    <div>
+                        <input type="file" id="image" name="image" value="" required>
+                    </div>
+                    <div>
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
 
-        <% if(url !=null ){ %>
-            <p class="url">
-                <%= url %>
-            </p>
-            <% } %>
+            <% if(url !=null ){ %>
+                <p class="url">
+                    <%= url %>
+                </p>
+                <% } %>
+        </div>
     </div>
 </body>
 

@@ -10,16 +10,18 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        <h1>Message</h1>
-        <div class="container">
-            <img src="data:image/<%=data.img.contentType%>;base64, 
-                         <%=data.img.data.toString('base64')%>">
-            <p>
-                <%= data.caption %>
-            </p>
+    <div class="externalwrapper">
+        <div class="wrapper">
+            <h1>Message</h1>
+            <div class="container">
+                <img src="data:image/<%=data.img.contentType%>;base64, 
+                <%=data.img.data.toString('base64')%>">
+                <p>
+                    <%= data.caption %>
+                </p>
+            </div>
         </div>
-    </div>
 </body>
+</div>
 
 </html>

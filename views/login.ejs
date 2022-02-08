@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <title>Temp Message</title>
+</head>
+
+<body>
+
+    <div class="externalwrapper">
+        <div class="wrapper">
+            <h1>Log In</h1>
+            <div class="container">
+                <form class="form" action="/login" method="POST" enctype="multipart/form-data">
+                    <div class="labelandinput">
+                        <label for="email">Email: </label>
+                        <input type="email" id="email" name="email" value="" placeholder="Email" required>
+                    </div>
+                    <div class="labelandinput" >
+                        <label for="password">Password: </label>
+                        <input type="text" id="password" name="password" value="" placeholder="Password" required>
+                    </div>
+                    <div>
+                        <button type="submit">Log In</button>
+                    </div>
+                </form>
+            </div>
+            <% if(error != null ){ %>
+                <p class="error">
+                    <%= error %>
+                </p>
+                <% } %>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
