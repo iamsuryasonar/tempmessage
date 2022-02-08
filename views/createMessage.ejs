@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <title>Temp Message</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>Create Message</h1>
+        <div class="container">
+            <form class="form" action="/" method="POST" enctype="multipart/form-data">
+                <div>
+                    <textarea type="text" id="caption" name="caption" value="" placeholder="Caption" rows="5" cols="20"
+                        required></textarea>
+                </div>
+                <div>
+                    <input type="file" id="image" name="image" value="" required>
+                </div>
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+
+        <% if(url !=null ){ %>
+            <p class="url">
+                <%= url %>
+            </p>
+            <% } %>
+    </div>
+</body>
+
+</html>
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
