@@ -67,7 +67,7 @@ app.post("/", upload.single("image"), (req, res, next) => {
     } else {
       let base_url = req.headers.host;
       res.render("createMessage", {
-        url: "http://tempmessage.herokuapp.com/" + uuid,
+        url: "http://" + base_url + "/" + uuid,
       });
     }
   });
