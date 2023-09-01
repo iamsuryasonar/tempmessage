@@ -5,10 +5,9 @@
 }
 
 body {
-  height: 100vh;
-  width: 100%;
   background-color: #ecf0f3;
 }
+
 .navigationbar {
   padding: 0px 60px;
   width: 100%;
@@ -19,19 +18,38 @@ body {
   align-items: center;
   z-index: 222;
   background-color: #ecf0f3;
+  position: sticky;
+  top: 0;
 }
+
+.question_section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 90vh;
+  margin: auto;
+}
+
+.question_section ul {
+  padding: 20px;
+}
+
 .buttonwrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
+
 .externalwrapper {
   height: 100vh;
   width: 100%;
   display: grid;
   place-items: center;
 }
+
 .wrapper {
   display: grid;
   place-items: center;
@@ -42,6 +60,7 @@ body {
   padding: 20px;
   border-radius: 5px;
 }
+
 .container {
   width: 90%;
   height: 90%;
@@ -87,6 +106,7 @@ a {
   text-decoration-line: none;
   color: #393e46;
 }
+
 .button {
   margin: auto 20px;
   width: 100px;
@@ -100,9 +120,11 @@ a {
   border-radius: 6px;
   box-shadow: 8px 8px 10px #c3c3c3, -8px -8px 10px #fdfdfd;
 }
+
 .button:active {
   box-shadow: inset 8px 8px 10px #c3c3c3, inset -8px -8px 10px #fdfdfd;
 }
+
 .fixedbutton {
   width: 140px;
   height: 60px;
@@ -113,17 +135,19 @@ a {
   border-radius: 0px;
 }
 
-.labelandinput{
+.labelandinput {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.labelandinput input{
+
+.labelandinput input {
   background-color: #ecf0f3;
   width: 75%;
   padding: 8px;
 }
-.labelandinput label{
+
+.labelandinput label {
   padding: 8px;
   font-size: 18px;
 }
@@ -133,13 +157,16 @@ img {
   max-width: 450px;
   margin-top: 0px;
 }
+
 h1 {
   color: #363636d3;
 }
+
 p {
   margin-top: 10px;
   font-size: 20px;
 }
+
 .url {
   font-size: 16px;
   width: 80%;
@@ -149,6 +176,7 @@ p {
   background: #ecf0f3;
   box-shadow: inset 8px 8px 10px #c3c3c3, inset -8px -8px 10px #fdfdfd;
 }
+
 @media screen and (max-width: 750px) {
   .wrapper {
     display: grid;
@@ -160,6 +188,7 @@ p {
     padding: 10px;
     border-radius: 5px;
   }
+
   .container {
     width: 90%;
     height: 90%;
@@ -169,11 +198,13 @@ p {
     gap: 8px;
   }
 }
+
 @media screen and (max-width: 1020px) {
   .wrapper {
     height: 400px;
     width: 400px;
   }
+
   .container {
     gap: 8px;
   }

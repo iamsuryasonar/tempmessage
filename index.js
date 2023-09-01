@@ -23,16 +23,17 @@ dburl =
   process.env.MONGO_PASSWORD +
   "@test.69vd0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
-mongoose.connect(
-  dburl,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  () => {
-    console.log("connected to database");
-  }
-);
+const connectionParams = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}
+mongoose.connect(dburl, connectionParams)
+  .then(() => {
+    console.log('Connected to the database!!!')
+  })
+  .catch((err) => {
+    console.error(`Error connecting to the database. n${err}`);
+  })
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -69,17 +70,21 @@ app.get("/", (req, res) => {
   let usertoken = coo.slice(4);
 
   if (usertoken) {
-    User.findOne({ author: usertoken }, (err, user) => {
-      if (err) {
-        return res.render("home");
-      } else if (!user) {
-        return res.render("home");
-      } else {
-        return res.redirect("/createMessage");
-      }
-    });
+    try {
+      User.findOne({ author: usertoken }, (err, user) => {
+        if (err) {
+          return res.render("home");
+        } else if (!user) {
+          return res.render("home");
+        } else {
+          return res.redirect("/createMessage");
+        }
+      });
+    } catch (error) {
+      return res.render("error", { error: error });
+    }
+
   }
-  
 });
 // -------------------- authentication routes-------------------------
 app.get("/login", (req, res) => {
@@ -88,15 +93,20 @@ app.get("/login", (req, res) => {
   let usertoken = coo.slice(4);
 
   if (usertoken) {
-    User.findOne({ author: usertoken }, (err, user) => {
-      if (err) {
-        return res.render("login", { error: null });
-      } else if (!user) {
-        return res.render("login", { error: null });
-      } else {
-        return res.redirect("/createMessage");
-      }
-    });
+    try {
+      User.findOne({ author: usertoken }, (err, user) => {
+        if (err) {
+          return res.render("login", { error: null });
+        } else if (!user) {
+          return res.render("login", { error: null });
+        } else {
+          return res.redirect("/createMessage");
+        }
+      });
+    } catch (error) {
+      return res.render("error", { error: error });
+    }
+
   }
 });
 app.get("/register", (req, res) => {
@@ -105,15 +115,20 @@ app.get("/register", (req, res) => {
   let usertoken = coo.slice(4);
 
   if (usertoken) {
-    User.findOne({ author: usertoken }, (err, user) => {
-      if (err) {
-        return res.render("register", { error: null });
-      } else if (!user) {
-        return res.render("register", { error: null });
-      } else {
-        return res.redirect("/createMessage");
-      }
-    });
+    try {
+      User.findOne({ author: usertoken }, (err, user) => {
+        if (err) {
+          return res.render("register", { error: null });
+        } else if (!user) {
+          return res.render("register", { error: null });
+        } else {
+          return res.redirect("/createMessage");
+        }
+      });
+    } catch (error) {
+      return res.render("error", { error: error });
+    }
+
   }
 });
 
@@ -156,14 +171,19 @@ app.post("/login", upload.single("image"), async (req, res) => {
 
   //store token in database for authorization
   user.author = newtoken;
-  user.save((err, data) => {
-    if (err) return res.render("error", { error: err });
-    res.cookie("jwt", newtoken, {
-      expires: new Date(Date.now() + 1000 * 60 * 7000),
-      httpOnly: true,
+  try {
+    user.save((err, data) => {
+      if (err) return res.render("error", { error: err });
+      res.cookie("jwt", newtoken, {
+        expires: new Date(Date.now() + 1000 * 60 * 7000),
+        httpOnly: true,
+      });
+      res.redirect("/createmessage");
     });
-    res.redirect("/createmessage");
-  });
+  } catch (error) {
+    return res.render("error", { error: error });
+  }
+
 });
 
 app.get("/auth/signout", (req, res) => {
@@ -172,24 +192,29 @@ app.get("/auth/signout", (req, res) => {
   let usertoken = coo.slice(4);
 
   if (usertoken) {
-    User.findOne({ author: usertoken }, (err, user) => {
-      if (err) {
-        return res.render("register", { error: null });
-      } else if (!user) {
-        return res.render("register", { error: null });
-      } else {
-        const signedoutauthor = "signedout";
-        user.author = signedoutauthor;
-        user.save((err, user) => {
-          if (!err) {
-            return res.redirect("/");
-          }
-          if (!data) {
-            return res.redirect("/");
-          }
-        });
-      }
-    });
+    try {
+      User.findOne({ author: usertoken }, (err, user) => {
+        if (err) {
+          return res.render("register", { error: null });
+        } else if (!user) {
+          return res.render("register", { error: null });
+        } else {
+          const signedoutauthor = "signedout";
+          user.author = signedoutauthor;
+          user.save((err, user) => {
+            if (!err) {
+              return res.redirect("/");
+            }
+            if (!data) {
+              return res.redirect("/");
+            }
+          });
+        }
+      });
+    } catch (error) {
+      return res.render("error", { error: error });
+    }
+
   }
 });
 
@@ -200,12 +225,17 @@ app.get("/createmessage", verify, (req, res) => {
     let coo = req.headers["cookie"];
     let usertoken = coo.slice(4);
     if (usertoken) {
-      User.findOne({ author: usertoken }, (err, data) => {
-        // token expired
-        if (err) return res.redirect("/login");
-        if (!data) return res.redirect("/login");
-        res.render("createMessage", { url: null });
-      });
+      try {
+        User.findOne({ author: usertoken }, (err, data) => {
+          // token expired
+          if (err) return res.redirect("/login");
+          if (!data) return res.redirect("/login");
+          res.render("createMessage", { url: null });
+        });
+      } catch (error) {
+        return res.render("error", { error: error });
+      }
+
     }
   }
 });
@@ -220,34 +250,39 @@ app.post(
       let coo = req.headers["cookie"];
       let usertoken = coo.slice(4);
       if (usertoken) {
-        User.findOne({ author: usertoken }, (err, data) => {
-          // token expired
-          if (err) return res.redirect("/login");
+        try {
+          User.findOne({ author: usertoken }, (err, data) => {
+            // token expired
+            if (err) return res.redirect("/login");
 
-          let msg = new Message({
-            caption: req.body.caption,
-            uuid: uuid,
-            seen: false,
-            img: {
-              data: fs.readFileSync(
-                path.join(__dirname + "/uploads/" + req.file.filename)
-              ),
-              contentType: "image/png",
-            },
+            let msg = new Message({
+              caption: req.body.caption,
+              uuid: uuid,
+              seen: false,
+              img: {
+                data: fs.readFileSync(
+                  path.join(__dirname + "/uploads/" + req.file.filename)
+                ),
+                contentType: "image/png",
+              },
+            });
+            msg.author = usertoken;
+            msg.save((err, data) => {
+              if (err) {
+                console.log(err);
+                return res.render("error", { error: err });
+              } else {
+                let base_url = req.headers.host;
+                res.render("createMessage", {
+                  url: "http://" + base_url + "/" + uuid,
+                });
+              }
+            });
           });
-          msg.author = usertoken;
-          msg.save((err, data) => {
-            if (err) {
-              console.log(err);
-              return res.render("error", { error: err });
-            } else {
-              let base_url = req.headers.host;
-              res.render("createMessage", {
-                url: "http://" + base_url + "/" + uuid,
-              });
-            }
-          });
-        });
+        } catch (error) {
+          return res.render("error", { error: error });
+        }
+
       }
     }
   }
@@ -281,11 +316,16 @@ app.get("/:uuid", (req, res) => {
       } else {
         // MESSAGE is not expired-> update status to seen and then return data
         data.seen = true;
-        data.save((err, data) => {
-          if (err) return res.render("error", { error: err });
-          res.render("viewMessage", { data: data });
-          return;
-        });
+        try {
+          data.save((err, data) => {
+            if (err) return res.render("error", { error: err });
+            res.render("viewMessage", { data: data });
+            return;
+          });
+        } catch (error) {
+          return res.render("error", { error: error });
+        }
+
       }
     }
   });
@@ -299,16 +339,20 @@ app.listen(port, (err) => {
   setInterval(timer, 1000 * 60 * 5);
 
   function timer() {
-    Message.deleteMany(
-      { createdAt: { $lte: new Date(new Date() - 30 * 60 * 1000) } },
-      (err, data) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(data.deletedCount + " message deleted");
+    try {
+      Message.deleteMany(
+        { createdAt: { $lte: new Date(new Date() - 30 * 60 * 1000) } },
+        (err, data) => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(data.deletedCount + " message deleted");
+          }
         }
-      }
-    );
+      );
+    } catch (error) {
+      return res.render("error", { error: error });
+    }
   }
   console.log("listening on port: " + port);
 });
