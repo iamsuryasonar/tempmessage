@@ -11,15 +11,13 @@
 
 <body>
     <div class="externalwrapper">
-        <div class="wrapper">
+        <div class="message_wrapper">
             <h1>Message</h1>
-            <div class="container">
-                <img src="data:image/<%=data.img.contentType%>;base64, 
+            <img class="image" src="data:image/<%=data.img.contentType%>;base64, 
                 <%=data.img.data.toString('base64')%>">
-                <p>
-                    <%= data.caption %>
-                </p>
-            </div>
+            <p>
+                <%= data.caption %>
+            </p>
         </div>
 </body>
 </div>

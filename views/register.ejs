@@ -10,10 +10,21 @@
 </head>
 
 <body>
+    <nav class="navigationbar">
+        <div>
+            <a href="/">
+                <h1>Temp Message</h1>
+            </a>
+        </div>
+        <div class="buttonwrapper">
+            <a class="button" href="/login"> Log In</a>
+            <a class="button" href="/register">Register</a>
+        </div>
+    </nav>
     <div class="externalwrapper">
         <div class="wrapper">
-            <h1>Register</h1>
             <div class="container">
+                <h1>Register</h1>
                 <form class="form" action="/register" method="POST" enctype="multipart/form-data">
                     <div class="labelandinput">
                         <label for="email">Email: </label>
@@ -28,7 +39,7 @@
                     </div>
                 </form>
             </div>
-            <% if(error != null ){ %>
+            <% if(error !=null ){ %>
                 <p class="error">
                     <%= error %>
                 </p>

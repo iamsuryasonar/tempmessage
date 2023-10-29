@@ -9,7 +9,7 @@ body {
 }
 
 .navigationbar {
-  padding: 0px 60px;
+  padding: 0px 20px;
   width: 100%;
   height: 80px;
   display: flex;
@@ -41,6 +41,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  gap: 10px;
   align-items: center;
 }
 
@@ -52,8 +53,10 @@ body {
 }
 
 .wrapper {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
   height: 500px;
   width: 500px;
   color: #393e46;
@@ -62,9 +65,28 @@ body {
   border-radius: 5px;
 }
 
+.message_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+  width: 100%;
+  color: #393e46;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  max-height: 740px;
+  max-width: 1024px;
+  display: block;
+}
+
 .container {
   width: 90%;
-  height: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,10 +95,9 @@ body {
 
 form {
   width: 90%;
-  height: 90%;
   display: flex;
   flex-direction: column;
-  margin: 60px auto;
+  margin: 10px auto;
   gap: 25px;
 }
 
@@ -109,7 +130,7 @@ a {
 }
 
 .button {
-  margin: auto 20px;
+  /* margin: auto 20px; */
   width: 100px;
   cursor: pointer;
   font-size: 18px;
@@ -153,12 +174,6 @@ a {
   font-size: 18px;
 }
 
-img {
-  max-height: 300px;
-  max-width: 450px;
-  margin-top: 0px;
-}
-
 h1 {
   color: #363636d3;
 }
@@ -180,8 +195,10 @@ p {
 
 @media screen and (max-width: 750px) {
   .wrapper {
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     height: 350px;
     width: 350px;
     color: #393e46;
@@ -192,9 +209,9 @@ p {
 
   .container {
     width: 90%;
-    height: 90%;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     align-items: center;
     gap: 8px;
   }
